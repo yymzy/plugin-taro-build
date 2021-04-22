@@ -1,11 +1,8 @@
 {
   "name": "taro-plugin-build",
-  "version": "0.0.1",
-  "main": "dist/taro-plugin-build.js",
+  "version": "0.0.2-alpha.0",
+  "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
-  "bin": {
-    "taro-plugin-build": "bin/taro-plugin-build.js"
-  },
   "files": [
     "bin",
     "dist"

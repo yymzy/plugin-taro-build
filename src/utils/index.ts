@@ -1,4 +1,3 @@
-import { IPluginContext } from '@tarojs/service';
 import { PagePathOptions } from 'types';
 import path from "path";
 
@@ -33,7 +32,7 @@ function resolvePagePath(opts: PagePathOptions, env: string = ""): string {
 /**
  * @description 组装页面路径
  */
-export function formatPagesName(ctx: IPluginContext) {
+export function formatPagesName(ctx) {
   const { outputPath } = ctx.paths;
   const { TARO_ENV, PLATFORM_ENV } = process.env;
   const { fs: { readJson, renameSync, existsSync } } = ctx.helper;

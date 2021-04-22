@@ -1,7 +1,6 @@
-import { IPluginContext } from '@tarojs/service';
 import { fileTypeMap, formatPagesName, recursiveReplaceObjectKeys } from "../../utils/";
 
-const build = (ctx: IPluginContext, opts) => {
+const build = (ctx, opts) => {
   const { TARO_ENV, MODE_ENV, PLATFORM_ENV, ROOT_PATH } = process.env;
   if (TARO_ENV !== PLATFORM_ENV) {
     ctx.registerPlatform({

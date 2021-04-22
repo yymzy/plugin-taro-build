@@ -24,9 +24,6 @@
       "core/*": [
         "src/core/*"
       ],
-      "command": [
-        "src/core/command/index.ts"
-      ],
       "command/*": [
         "src/core/command/*"
       ],
