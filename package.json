@@ -1,7 +1,7 @@
 {
   "name": "taro-plugin-build",
-  "version": "0.0.2-alpha.3",
-  "main": "dist/index.js",
+  "version": "0.0.2-alpha.4",
+  "main": "index.js",
   "types": "dist/types/index.d.ts",
   "files": [
     "bin",
