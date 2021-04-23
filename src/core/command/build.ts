@@ -1,7 +1,15 @@
 import { fileTypeMap, formatPagesName, recursiveReplaceObjectKeys } from "../../utils/";
 
 const build = (ctx, opts) => {
+  
   const { TARO_ENV, MODE_ENV, PLATFORM_ENV, ROOT_PATH } = process.env;
+
+  // 更新编译环境变量
+  ctx.initialConfig.env = {
+    TARO_ENV, MODE_ENV, PLATFORM_ENV, ROOT_PATH,
+    ...ctx.initialConfig.env,
+  }
+
   if (TARO_ENV !== PLATFORM_ENV) {
     ctx.registerPlatform({
       name: TARO_ENV,
@@ -30,12 +38,6 @@ const build = (ctx, opts) => {
         // 准备 miniRunner 参数
         const miniRunnerOpts = {
           ...config,
-          env: {
-            ...config.env,
-            MODE_ENV,
-            PLATFORM_ENV,
-            ROOT_PATH
-          },
           nodeModulesPath,
           buildAdapter: PLATFORM_ENV,
           isBuildPlugin: false,
