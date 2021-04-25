@@ -1,3 +1,3 @@
-import { build } from "./core";
+import build from "./core";
 
 export default build;

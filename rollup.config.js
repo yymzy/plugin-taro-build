@@ -23,6 +23,7 @@ export default {
     sourcemap: true,
     file: pkg.main,
     name: pkg.name,
+    exports: "named",
   },
   external: ["miniprogram-ci", "path", "tty", "os"],
   plugins: [
