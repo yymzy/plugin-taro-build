@@ -60,7 +60,7 @@ export function formatPagesName(ctx) {
 export function resolvePath(p: string, suffix: string): string {
   const platformEnv = process.env.PLATFORM_ENV;
   const modeEnv = process.env.MODE_ENV;
-  const types = [];
+  const types = [platformEnv];
   let realpath = "";
   if (modeEnv) {
     types.unshift(`${platformEnv}.${modeEnv}`, modeEnv);
