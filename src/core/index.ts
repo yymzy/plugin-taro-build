@@ -1,4 +1,5 @@
-import { fileTypeMap, formatPagesName, recursiveReplaceObjectKeys } from "../utils/";
+import { fileTypeMap, formatPagesName, recursiveReplaceObjectKeys, resolveScriptPath, resolveStylePath } from "../utils/";
+import path from "path";
 
 export default (ctx, opts) => {
     const { TARO_ENV, MODE_ENV, PLATFORM_ENV, ROOT_PATH } = process.env;
@@ -7,6 +8,13 @@ export default (ctx, opts) => {
         TARO_ENV, MODE_ENV, PLATFORM_ENV, ROOT_PATH,
         ...ctx.initialConfig.env,
     }
+    const { npm } = ctx.helper;
+    const { nodeModulesPath } = ctx.paths;
+
+    // 改写mini-runner中脚本路径处理方法
+    const helperUtils = npm.getNpmPkgSync("@tarojs/helper", path.join(nodeModulesPath, "@tarojs/mini-runner"))
+    helperUtils.resolveScriptPath = (p: string): string => resolveScriptPath(p, ctx);
+    helperUtils.resolveStylePath = (p: string): string => resolveStylePath(p, ctx);
 
     if (TARO_ENV !== PLATFORM_ENV) {
         ctx.registerPlatform({
@@ -74,8 +82,6 @@ export default (ctx, opts) => {
             }
         });
     }
-
-
 
     ctx.onBuildFinish(() => {
         // 格式化输出的页面名称：移除TARO_ENV后缀
