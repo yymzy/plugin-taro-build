@@ -63,7 +63,7 @@ export function resolvePath(p: string, suffix: string): string {
   const types = [];
   let realpath = "";
   if (modeEnv) {
-    types.unshift(`${modeEnv}.${platformEnv}`, modeEnv);
+    types.unshift(`${platformEnv}.${modeEnv}`, modeEnv);
   }
   for (let i = 0, len = types.length; i < len; i++) {
     const type = types[i];
