@@ -73,7 +73,8 @@ export function resolvePath(p: string, suffix: string): string {
     if (fs.existsSync(realpath = `${p}${path.sep}index.${type}${suffix}`)) {
       return realpath;
     }
-    if (fs.existsSync(realpath = `${p.replace(/\/index$/, `.${type}/index`)}${suffix}`)) {
+    const pathReg = /\/index$/;
+    if (pathReg.test(p) && fs.existsSync(realpath = `${p.replace(pathReg, `.${type}/index`)}${suffix}`)) {
       return realpath;
     }
   }
@@ -114,7 +115,7 @@ export function resolveStylePath(p: string, ctx): string {
  * @returns 
  */
 export function resolveScriptPath(p: string, ctx): string {
-  const { JS_EXT, TS_EXT } = ctx.helper
+  const { JS_EXT, TS_EXT } = ctx.helper;
   const SCRIPT_EXT = JS_EXT.concat(TS_EXT);
   for (let i = 0, len = SCRIPT_EXT.length; i < len; i++) {
     const item = SCRIPT_EXT[i];
