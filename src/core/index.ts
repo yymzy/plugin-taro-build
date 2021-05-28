@@ -2,7 +2,7 @@ import { fileTypeMap, formatPagesName, recursiveReplaceObjectKeys, resolveScript
 import path from "path";
 
 export default (ctx, opts) => {
-    const { TARO_ENV, MODE_ENV, PLATFORM_ENV, ROOT_PATH } = process.env;
+    const { TARO_ENV, MODE_ENV, PLATFORM_ENV = TARO_ENV, ROOT_PATH } = process.env;
     // 更新编译环境变量
     ctx.initialConfig.env = {
         TARO_ENV, MODE_ENV, PLATFORM_ENV, ROOT_PATH,
@@ -16,7 +16,7 @@ export default (ctx, opts) => {
     helperUtils.resolveScriptPath = (p: string): string => resolveScriptPath(p, ctx);
     helperUtils.resolveStylePath = (p: string): string => resolveStylePath(p, ctx);
 
-    if (TARO_ENV !== PLATFORM_ENV) {
+    if (PLATFORM_ENV && TARO_ENV !== PLATFORM_ENV) {
         ctx.registerPlatform({
             name: TARO_ENV,
             useConfigName: "mini",

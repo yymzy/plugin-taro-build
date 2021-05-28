@@ -28,10 +28,11 @@ export function recursiveReplaceObjectKeys(obj, keyMap) {
  */
 export function formatPagesName(ctx) {
   const { outputPath } = ctx.paths;
-  const { PLATFORM_ENV } = process.env;
+  const { TARO_ENV, PLATFORM_ENV = TARO_ENV } = process.env;
   const { fs: { readJson, renameSync } } = ctx.helper;
   const fileType = fileTypeMap[PLATFORM_ENV];
 
+  if (!fileType) return;
   readJson(path.resolve(outputPath, "./app.json")).then(({ pages }) => {
     pages.map(pagePath => {
       Object.keys(fileType).map(key => {
