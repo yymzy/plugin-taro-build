@@ -1,5 +1,7 @@
 ## [0.0.10](https://new.github.com/yymzy/taro-plugin-build/compare/v0.0.9...v0.0.10) (2021-05-28)
 
+## [0.0.10](https://new.github.com/yymzy/taro-plugin-build/compare/v0.0.9...v0.0.10) (2021-05-28)
+
 ## [0.0.9](https://new.github.com/yymzy/taro-plugin-build/compare/v0.0.8...v0.0.9) (2021-05-19)
 
 ## [0.0.9](https://new.github.com/yymzy/taro-plugin-build/compare/v0.0.8...v0.0.9) (2021-05-19)
