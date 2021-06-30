@@ -89,7 +89,6 @@ export default (ctx, opts) => {
             const replaceKeyMap = {
                 navigationStyle: "transparentTitle"
             };
-
             Object.keys(tempFiles).forEach(key => {
                 const item = tempFiles[key];
                 if (item.config) {
