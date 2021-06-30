@@ -83,6 +83,27 @@ export default (ctx, opts) => {
         });
     }
 
+    // 支付宝特殊处理，额外修改配置项
+    if (PLATFORM_ENV === "alipay") {
+        ctx.modifyBuildTempFileContent(({ tempFiles }) => {
+            const replaceKeyMap = {
+                navigationStyle: "transparentTitle"
+            };
+
+            Object.keys(tempFiles).forEach(key => {
+                const item = tempFiles[key];
+                if (item.config) {
+                    if (item.config.navigationStyle === 'custom') {
+                        item.config.navigationBarTitleText = "";
+                        item.config.navigationStyle = "always";
+                        item.config.titlePenetrate = "YES";
+                    }
+                    recursiveReplaceObjectKeys(item.config, replaceKeyMap);
+                }
+            });
+        });
+    }
+
     ctx.onBuildFinish(() => {
         // 格式化输出的页面名称：移除TARO_ENV后缀
         formatPagesName(ctx)
