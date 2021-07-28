@@ -33,8 +33,14 @@ export function formatPagesName(ctx) {
   const fileType = fileTypeMap[PLATFORM_ENV];
 
   if (!fileType) return;
-  readJson(path.resolve(outputPath, "./app.json")).then(({ pages }) => {
-    pages.map(pagePath => {
+  readJson(path.resolve(outputPath, "./app.json")).then(({ pages, subpackages, subPackages = subpackages }) => {
+    const list = [...pages];
+    if (subPackages) {
+      subPackages.map(({ root, pages = [] }) => {
+        list.push(...pages.map(item => `${root}/${item}`))
+      });
+    }
+    list.map(pagePath => {
       Object.keys(fileType).map(key => {
         try {
           const suffix = fileType[key];
