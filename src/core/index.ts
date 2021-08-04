@@ -103,8 +103,12 @@ export default (ctx, opts) => {
         });
     }
 
-    ctx.onBuildFinish(() => {
-        // 格式化输出的页面名称：移除TARO_ENV后缀
-        formatPagesName(ctx)
-    });
+    const [changePageName = true] = opts || [];
+    if (changePageName) {
+        ctx.onBuildFinish(() => {
+            // 格式化输出的页面名称：移除TARO_ENV后缀
+            formatPagesName(ctx);
+        });
+    }
+
 };
