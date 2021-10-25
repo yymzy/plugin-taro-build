@@ -149,5 +149,17 @@ export const fileTypeMap = {
     style: ".acss",
     config: ".json",
     script: ".js"
+  },
+  swan: {
+    templ: ".swan",
+    style: ".css",
+    config: ".json",
+    script: ".js"
+  },
+  quick: {
+    templ: ".qxml",
+    style: ".css",
+    config: ".json",
+    script: ".js"
   }
 }

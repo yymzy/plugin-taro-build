@@ -27,7 +27,9 @@ export default (ctx, opts) => {
                 const projectConfigName = (key =>
                 ({
                     weapp: "project.config.json",
-                    alipay: "mini.project.json"
+                    alipay: "mini.project.json",
+                    swan: "project.swan.json",
+                    quick: "quickapp.config.json"
                 }[key]))(PLATFORM_ENV);
 
                 // 清空输出包
@@ -110,5 +112,4 @@ export default (ctx, opts) => {
             formatPagesName(ctx);
         });
     }
-
 };
