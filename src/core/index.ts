@@ -1,8 +1,18 @@
-import { fileTypeMap, formatPagesName, recursiveReplaceObjectKeys, resolveScriptPath, resolveStylePath } from "../utils/";
+import {
+    copy404Page,
+    fileTypeMap,
+    formatPagesName,
+    recursiveReplaceObjectKeys,
+    resolveScriptPath,
+    resolveStylePath
+} from "../utils/";
+import { ref } from "utils";
 import path from "path";
 
 export default (ctx, opts) => {
+    ref.current = ctx;
     const { TARO_ENV, MODE_ENV, PLATFORM_ENV = TARO_ENV, ROOT_PATH } = process.env;
+
     // 更新编译环境变量
     ctx.initialConfig.env = {
         TARO_ENV, MODE_ENV, PLATFORM_ENV, ROOT_PATH,
@@ -13,8 +23,8 @@ export default (ctx, opts) => {
 
     // 改写mini-runner中脚本路径处理方法
     const helperUtils = npm.getNpmPkgSync("@tarojs/helper", path.join(nodeModulesPath, "@tarojs/mini-runner"))
-    helperUtils.resolveScriptPath = (p: string): string => resolveScriptPath(p, ctx);
-    helperUtils.resolveStylePath = (p: string): string => resolveStylePath(p, ctx);
+    helperUtils.resolveScriptPath = (p: string): string => resolveScriptPath(p);
+    helperUtils.resolveStylePath = (p: string): string => resolveStylePath(p);
 
     if (PLATFORM_ENV && TARO_ENV !== PLATFORM_ENV) {
         ctx.registerPlatform({
@@ -106,10 +116,13 @@ export default (ctx, opts) => {
     }
 
     const [changePageName = true] = opts || [];
-    if (changePageName) {
-        ctx.onBuildFinish(() => {
-            // 格式化输出的页面名称：移除TARO_ENV后缀
-            formatPagesName(ctx);
-        });
-    }
+
+    ctx.onBuildStart(() => {
+        copy404Page();
+    });
+
+    ctx.onBuildFinish(() => {
+        // 格式化输出的页面名称：移除TARO_ENV后缀
+        changePageName && formatPagesName();
+    });
 };

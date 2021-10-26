@@ -1,6 +1,6 @@
 {
   "name": "taro-plugin-build",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
@@ -39,7 +39,9 @@
     ],
     "*.{md}": "yarn prettier"
   },
-  "dependencies": {},
+  "dependencies": {
+    "fs-extra": "^10.0.0"
+  },
   "devDependencies": {
     "@rollup/plugin-alias": "^3.1.1",
     "@rollup/plugin-commonjs": "^13.0.0",
