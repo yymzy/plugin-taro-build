@@ -11,12 +11,15 @@ import path from "path";
 
 export default (ctx, opts) => {
     ref.current = ctx;
-    const { TARO_ENV, MODE_ENV, PLATFORM_ENV = TARO_ENV, ROOT_PATH } = process.env;
+    const { TARO_ENV, MODE_ENV, PLATFORM_ENV = TARO_ENV, ROOT_PATH, DEBUG_ENV } = process.env;
 
     // 更新编译环境变量
     ctx.initialConfig.env = {
-        TARO_ENV, MODE_ENV, PLATFORM_ENV, ROOT_PATH,
+        TARO_ENV, MODE_ENV, PLATFORM_ENV, ROOT_PATH, DEBUG_ENV,
         ...ctx.initialConfig.env,
+    }
+    if (DEBUG_ENV === 'OPEN') {
+        ctx.initialConfig.uglify = {}
     }
     const { npm } = ctx.helper;
     const { nodeModulesPath } = ctx.paths;
@@ -119,6 +122,11 @@ export default (ctx, opts) => {
 
     ctx.onBuildStart(() => {
         copy404Page();
+    });
+
+    ctx.modifyWebpackChain(({ chain }) => {
+        // taro-ui 组件代码被当成副作用移除了
+        chain.optimization.sideEffects(false);
     });
 
     ctx.onBuildFinish(() => {
