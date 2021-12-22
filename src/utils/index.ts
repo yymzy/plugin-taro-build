@@ -162,7 +162,19 @@ export const fileTypeMap = {
     config: ".json",
     script: ".js"
   },
-  quick: {
+  quickapp: {
+    templ: ".ux",
+    style: ".css",
+    config: ".json",
+    script: ".js"
+  },
+  h5: {
+    templ: ".html",
+    style: ".css",
+    config: ".json",
+    script: ".js"
+  },
+  rn: {
     templ: ".qxml",
     style: ".css",
     config: ".json",
